@@ -1,17 +1,29 @@
 #simple div
-str_input = input()
+str_input = input("A: ")
 
-varA = int(str_input)
+delimoe = int(str_input)
+#print(type(delimoe))
 
-str_input2 = input()
+operation = input("+ / * - ^: ")
 
-varB = int(str_input2)
+str_input2 = input("B: ")
 
-operation = input()
+delitel = int(str_input2)
+#print(type(delitel))
+result = None
 
 if operation == '/':
-    result = varA / varB
+	result = delimoe / delitel
+elif operation == '+':
+	result = delimoe + delitel
+elif operation == '-':
+	result = delimoe - delitel
+elif operation == '*':
+	result = delimoe * delitel
+elif operation == '^':
+	result = delimoe ** delitel
 else:
-    result = "???"
+	result = "unknown"
+#print(type(result))
 
-print(result)
+print("Result: " + str(result))
