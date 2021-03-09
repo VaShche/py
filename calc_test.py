@@ -91,6 +91,9 @@ class CalcTestCaseParams(unittest.TestCase):
     def test_input_in_one_line(self):
         self.assertTrue(one_line, "Input in one line is not tested")
 
+class CalcTestMoreThanOneOperations(CalcTestCasePlus):
+    in_params = [-5, '+', 2, '-', -5]
+    exp_res = '2'
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
