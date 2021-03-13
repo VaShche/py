@@ -92,8 +92,12 @@ class CalcTestCaseParams(unittest.TestCase):
         self.assertTrue(one_line, "Input in one line is not tested")
 
 class CalcTestMoreThanOneOperations(CalcTestCasePlus):
-    in_params = [-5, '+', 2, '-', -5]
-    exp_res = '2'
+    in_params = [-5.1, '+', 2.6, '-', -5]
+    exp_res = '2.5'
+
+class CalcTestPriorityOperations(CalcTestCasePlus):
+    in_params = [2, '+', 2, '*', 2, '+', 3, '/', 2]
+    exp_res = '7.5'
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
