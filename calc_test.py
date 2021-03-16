@@ -21,6 +21,7 @@ def script_executer(in_params) -> []:
             for line in in_params:
                 in_lines.append(str(line) + '\n')
         f.writelines(in_lines)
+    in_io = io.StringIO()
     with open('out.txt', 'w') as f_out:
         with open('in.txt', 'r') as f_in:
             code = subprocess.call([py_pass, calc_script], stdin=f_in, stdout=f_out, stderr=f_out)
@@ -98,6 +99,11 @@ class CalcTestMoreThanOneOperations(CalcTestCasePlus):
 class CalcTestPriorityOperations(CalcTestCasePlus):
     in_params = [2, '+', 2, '*', 2, '+', 3, '/', 2]
     exp_res = '7.5'
+
+class CalcTestPriorityOperations2(CalcTestCasePlus):
+    in_params = [2, '*', 2, '+', 2, '+', 3, '/', 2]
+    exp_res = '7.5'
+
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
