@@ -37,12 +37,12 @@ calculation
 for action in actions:
 	action['val'] = float(action.get('val'))
 
-result = actions[0].get('val')
+result = None
 
 for action in actions:
 	if type(result) == str:
 		break
-	print(action)
+
 	var_A = result
 	var_B = action.get('val')
 	operation = action.get('opr')
@@ -55,6 +55,6 @@ for action in actions:
 	elif operation == '^':
 		result = var_A ** var_B
 	else:
-		result = var_A
+		result = var_B
 
 print("Result: " + str(result))
