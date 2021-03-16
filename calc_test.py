@@ -21,7 +21,6 @@ def script_executer(in_params) -> []:
             for line in in_params:
                 in_lines.append(str(line) + '\n')
         f.writelines(in_lines)
-    in_io = io.StringIO()
     with open('out.txt', 'w') as f_out:
         with open('in.txt', 'r') as f_in:
             code = subprocess.call([py_pass, calc_script], stdin=f_in, stdout=f_out, stderr=f_out)
