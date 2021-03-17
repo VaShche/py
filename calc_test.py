@@ -14,18 +14,22 @@ def script_executer(in_params) -> []:
     :return: (output lines from cout, exit code)
     """
     in_lines = []
-    with open('in.txt', 'w') as f:
-        if one_line:
-            in_lines = ''.join(map(str, in_params))
-        else:
-            for line in in_params:
-                in_lines.append(str(line) + '\n')
-        f.writelines(in_lines)
-    with open('out.txt', 'w') as f_out:
-        with open('in.txt', 'r') as f_in:
-            code = subprocess.call([py_pass, calc_script], stdin=f_in, stdout=f_out, stderr=f_out)
-    with open('out.txt', 'r') as f_out:
-        result_lines = f_out.readlines()
+
+    if one_line:
+        in_lines = ''.join(map(str, in_params))
+    else:
+        for line in in_params:
+            in_lines.append(str(line) + '\n')
+
+    p = subprocess.Popen([py_pass, calc_script], encoding='utf-8',
+                         stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    try:
+        outs, errs = p.communicate(in_lines, timeout=5)
+    except subprocess.TimeoutExpired:
+        p.kill()
+        outs, errs = p.communicate()
+    code = p.returncode
+    result_lines = outs + errs
     return result_lines, code
 
 
@@ -102,6 +106,10 @@ class CalcTestPriorityOperations(CalcTestCasePlus):
 class CalcTestPriorityOperations2(CalcTestCasePlus):
     in_params = [2, '*', 2, '+', 2, '+', 3, '/', 2]
     exp_res = '7.5'
+
+class CalcTestPriorityOperations3(CalcTestCasePlus):
+    in_params = [2, '^', 2, '-', -3, '^', 2]
+    exp_res = '-5'
 
 
 if __name__ == '__main__':
