@@ -29,5 +29,8 @@ def get_text_msg(msg):
             bot.reply_to(msg, res)
         else:
             pass
-
-bot.polling(none_stop=True)
+while True:
+    try:
+        bot.polling(none_stop=True)
+    finally:
+        print('zzz')
