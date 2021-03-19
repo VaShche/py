@@ -42,15 +42,21 @@ for i, letter in enumerate(str_command):
 actions[-1]['val'] = float(temp_str)
 
 """вычисляем операции с высоким приоритетом"""
-for i, action in enumerate(actions):
+i = 0
+while i < len(actions):
+	action = actions[i]
 	operation = action.get('opr')
 	if operation == hp_ops[0]:
 		actions[i-1]['val'] = actions[i-1].get('val') ** action.get('val')
 		actions.remove(action)
+	else:
+		i += 1
 
 """вычисляем операции со средним приоритетом"""
 result = None
-for i, action in enumerate(actions):
+i = 0
+while i < len(actions):
+	action = actions[i]
 	operation = action.get('opr')
 	if operation in mp_ops:
 		if action.get('val') == 0 and operation == '/':
@@ -58,6 +64,8 @@ for i, action in enumerate(actions):
 		else:
 			actions[i-1]['val'] = eval('{0}{1}{2}'.format(actions[i-1].get('val'), operation, action.get('val')))
 		actions.remove(action)
+	else:
+		i += 1
 
 """вычисляем операции с низким приоритетом"""
 for action in actions:
