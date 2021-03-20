@@ -42,15 +42,17 @@ for i, letter in enumerate(str_command):
 actions[-1]['val'] = float(temp_str)
 
 """вычисляем операции с высоким приоритетом"""
+actions.reverse()
 i = 0
 while i < len(actions):
 	action = actions[i]
 	operation = action.get('opr')
 	if operation == hp_ops[0]:
-		actions[i-1]['val'] = actions[i-1].get('val') ** action.get('val')
+		actions[i+1]['val'] = actions[i+1].get('val') ** action.get('val')
 		actions.remove(action)
 	else:
 		i += 1
+actions.reverse()
 
 """вычисляем операции со средним приоритетом"""
 result = None
