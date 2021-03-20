@@ -3,9 +3,14 @@
 """
 
 #считать строчку от пользователя
+#instr = input('Что вычилсить? ')
+instr = "-2 + 3.5 * 2 - 3 ^ 2"
 
 #почистить строку 
 # "-2 + 3.5 * 2 - 3 ^ 2"   ->    "-2+3.5*2-3^2"
+instr = instr.replace(' ', '')
+
+
 
 #распарсить
 """
@@ -13,9 +18,37 @@
 "-2+3.5*2-3^2"
 
 на выход ?структура данных? с операциями +- и значениями
-(+ * - ^)
-(-2 3.5 2 3 2)
+
+[{'opr': '', 'val': -2},{'opr': +, 'val': 3.5},{'opr': *, 'val': 2}, ...]
+
 """
+hp_ops = tuple('^')
+mp_ops = ('*', '/')
+lp_ops = tuple('+-')
+supported_ops = hp_ops + mp_ops + lp_ops
+digit_chars = tuple('0123456789.-')
+
+actions = list()
+d = dict()
+d['opr'] = 'First'
+d['val'] = ''
+actions.append(d)
+print(actions)
+
+# -2+3.5*2-3^-2
+# [{'opr': '', 'val': '2'},{'opr': +, 'val': '3.5'},{'opr': *, 'val': 2}, ...]
+
+i = 0
+for letter in instr:
+    if letter in supported_ops :
+        actions.append({'opr': letter, 'val': ''})
+        pass # под операции
+    elif letter in digit_chars:
+        actions[-1]['val'] += letter
+        pass # под числа
+    i += 1
+
+print(actions)
 
 # вычислить операции 1го приоритета (возведение в степень)
 """
