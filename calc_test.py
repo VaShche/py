@@ -104,8 +104,8 @@ class CalcTestMoreThanOneOperations2(CalcTestCasePlus):
     exp_res = '4.5'
 
 class CalcTestMoreThanOneOperations3(CalcTestCasePlus):
-    in_params = [2, '^', 2, '^', 2]
-    exp_res = '16'
+    in_params = [2, '^', 2, '^', 3]
+    exp_res = '256'
 
 class CalcTestPriorityOperations(CalcTestCasePlus):
     in_params = [2, '+', 2, '*', 2, '+', 3, '/', 2]
